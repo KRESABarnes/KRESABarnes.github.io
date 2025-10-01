@@ -2,6 +2,7 @@ body{
     background-image: linear-gradient(to bottom right, rgb(11, 255, 24), rgb(11, 62, 121));
     background-attachment: fixed;
     margin: 0px;
+    cursor: url("Resources/Axolotl-PNG-Free-Download.png"), auto;
 }
 .Title{
     text-align: center;
