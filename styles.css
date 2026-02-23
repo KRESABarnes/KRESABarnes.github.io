@@ -1,0 +1,10 @@
+img{
+    position:absolute;
+    right: 500px;
+    top: 100px;
+    height: 400px;
+}
+
+#glyph{
+    display: none;
+}
