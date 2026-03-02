@@ -3,14 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glyphs UwU</title>
+    <title>Glyph Generator</title>
     <link rel="stylesheet" href="./styles.css">
+   
 </head>
 <body style="background-color: white;">
 
- <canvas id="glyph" width="1000px" height=1000px style="position: absolute; left: 20%; top:100px;"></canvas>
-    <form id = textinput> 
-    <input type = "text" value ="Make a glyph" maxlength="14">
+    <canvas id="glyph" width="1000px" height=1000px style="position: absolute; left: 20%; top:100px;"></canvas>
+    <p>Glyph Settings</p>
+    <form id = glyphSettings>
+    <label for = "glyphText">Glyph text:</label>
+    <input id="glyphText" name = "glyphText" type = "text" placeholder ="Your text here" maxlength="28" >
+        <label id = glyphTextLengthCheck for = "glyphText">Length: 0</label>
+    <div class = "glyphForm"></div>
+
+    <p>Glyph Text Length</p>
+    <input type="radio" value=14 name ='glyphLength' id="AllUnicode">
+    <label for="AllUnicode">14 (All unicode)</label>
+    <input type="radio" value=9 name ='glyphLength' id="mostUnicode">
+    <label for="mostUnicode">9 (Most Unicode)</label>
+    <input type="radio" value=7 name ='glyphLength' id="looksGood" checked>
+    <label for="looksGood">7 (Looks Best)</label>
+    <input type="radio" value= 4 name ='glyphLength' id="ASCII">
+    <label for="ASCII">4 (All ASCII)</label>
+    <input type="radio" value= -1 name ='glyphLength' id="Custom">
+    <label for="Custom">Custom</label>
+    <div class = "glyphForm"></div>
+    <section id="customLengthSettings" style = "display: none">
+            <input type="number" name = 'glyphLengthCustom' id="customNumber" min="1" value=7>
+             <label for="customNumber">Choose your length</label>
+             <div class = "glyphForm"></div>
+             <input type = "checkbox" id="primeCheck" switch checked>
+        </section>
+
+    <p>Glyph Color</p>
+
+    <input type="radio" value="Rainbow" name ='Color' id="Rainbow" checked >
+    <label for="Rainbow">Rainbow</label>
+    <input type="radio" value="Color" name ='Color'id = "Choose">
+    <label for="Choose">Choose your Color</label>
+
     </form>
 
 
