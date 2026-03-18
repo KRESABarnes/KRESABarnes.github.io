@@ -10,7 +10,13 @@
     const primeCheck = document.getElementById("primeCheck")
     let forcePrimes = true
     const glyphFullLength = document.querySelectorAll("input[name='glyphLength']");
-
+    const colorButton = document.querySelectorAll("input[name='Color']");
+    const rainbowOffset = document.getElementById("rainbowOffset")
+    const customColor = document.getElementById("customColor")
+    let rainbowAngle = 270
+    let colorMode = 0
+    let colorChoice = '#000000'
+    let backgroundColor = '#FFFFFF'
 
 
 
@@ -28,7 +34,7 @@ for( const i in primes){
 
 testArray = getGlyphArray(input)
 
-console.log(testArray)
+
 const canvas = document.getElementById('glyph');
 const ctx = canvas.getContext('2d');
 ctx.fillStyle = 'black'
@@ -65,10 +71,15 @@ ctx.fill()
 ctx.stroke();
 
 for(let i = 0;i<testArray.length;i++){
-    
+    if (colorMode){
+        ctx.strokeStyle = colorChoice
+    }
+    else{
+        ctx.strokeStyle= `hsl(${rainbowAngle+(360/testArray.length)*(i+1)}, 100%, 40%)`
+    }
     let initialAngle =1.5*Math.PI
-    let moveAngle = (i+1)*pivotAngle
-    ctx.strokeStyle= `hsl(${270+(360/testArray.length)*(i+1)}, 100%, 40%)`
+    let moveAngle = (i+1)*pivotAngle;
+    
     ctx.beginPath()
     ctx.moveTo(center,center-radius)
     let firstOne = testArray[i].indexOf(1)-1
@@ -93,7 +104,7 @@ canvas.toBlob((blob)=>{
   newImg.id = "newImg"
   const url= URL.createObjectURL(blob)
   newImg.src = url
-  document.body.appendChild(newImg)
+  document.getElementById("CPanel").appendChild(newImg)
   
 })
 
@@ -107,7 +118,7 @@ let charNumbers = wordNumbers.map((char)=>{
 charNumbers.sort((a,b)=> a-b)
 
 charNumbers = [... new Set(charNumbers)]
-//console.log(charNumbers)
+
 
 function necklaceMaker(input) {
     input = Array.from(input)
@@ -164,7 +175,7 @@ function* _generate(state, render, depth, period) {
 
 
     let sortArray = Array.from(charNumbers)
-        //console.log(sortArray)
+        
     let binaryArray = necklaceMaker(sortArray)
     let printedArray = []
 
@@ -180,13 +191,12 @@ function* _generate(state, render, depth, period) {
             printedArray.push(binaryArray[output])
         }
     })
-    //printedArray.map((item)=>{console.log(item)})
+    
     return(printedArray)
     }
 makeGlyph()
 
-let typingTimer; 
-const waitTime = 200;
+
 
 const glyphWipe = () =>{
     forcePrimes= primeCheck.checked
@@ -198,14 +208,15 @@ const glyphWipe = () =>{
     makeGlyph()
 }
 
+    
+//event listeners
+let typingTimer; 
+const waitTime = 400;
 glyphText.addEventListener("keyup",function (){ //Text Input
 
-
-    
     textLength.innerText = `Length: ${this.value.length}`
     clearTimeout(typingTimer); 
     typingTimer = setTimeout(glyphWipe, waitTime);
-
 })
 
 for(const button of glyphFullLength){  //Length Radio Buttons
@@ -221,11 +232,36 @@ button.addEventListener("change",function(){
     }
    glyphWipe()
 })}
-customGlyphLength.addEventListener("change",function(){
+customGlyphLength.addEventListener("change",function(){ //custom glyph length box
     wordLength=customGlyphLength.value
     glyphWipe()
 })
-primeCheck.addEventListener("change", function(){
+primeCheck.addEventListener("change", function(){ //update forcing primes
     forcePrimes= primeCheck.checked
     glyphWipe()
+})
+for(const button of colorButton){  //Length Radio Buttons
+button.addEventListener("change",function(){
+    if(this.value == 1){
+        document.getElementById('customColorPicker').style.display='block'
+        document.getElementById('rainbowShifter').style.display='none'
+        colorMode = 1
+    }
+    else{
+        document.getElementById('customColorPicker').style.display='none'
+        document.getElementById('rainbowShifter').style.display='block'
+        colorMode = 0
+    }
+   clearTimeout(typingTimer); 
+    typingTimer = setTimeout(glyphWipe, 20);
+})}
+rainbowOffset.addEventListener('change', function(){
+    rainbowAngle=this.value
+    clearTimeout(typingTimer); 
+    typingTimer = setTimeout(glyphWipe, 50);
+})
+customColor.addEventListener('change', function(){
+    colorChoice = `${this.value}`
+    clearTimeout(typingTimer); 
+    typingTimer = setTimeout(glyphWipe, 50);
 })

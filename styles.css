@@ -1,10 +1,37 @@
-img{
-    position:absolute;
-    right: 500px;
-    top: 100px;
-    height: 800px;
+html{
+    height: 100vh;
+    width: 100vw;
+}
+body{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+#newImg{
+    position: relative;
+    height: 25vw;
+    left: 20rem;
+    top: 10vh;
 }
 
 #glyph{
     display: none;
+}
+
+.Panel{
+    border-style:none ;
+    margin: 1vw;
+    height: 90vh;
+}
+#LPanel{
+    flex: 1;
+    background-color: rgb(178, 178, 178);
+}
+#CPanel{
+    flex: 2;
+    background-color: rgb(255, 255, 255);
+}
+#RPanel{
+    flex: 1;
+    background-color: rgb(9, 90, 196);
 }

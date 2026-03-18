@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="./styles.css">
    
 </head>
-<body style="background-color: white;">
 
+<body style="background-color: rgb(142, 3, 158);">
+<section class = 'Panel' id="LPanel">
     <canvas id="glyph" width="1000px" height=1000px style="position: absolute; left: 20%; top:100px;"></canvas>
     <p>Glyph Settings</p>
     <form id = glyphSettings>
@@ -34,17 +35,33 @@
              <label for="customNumber">Choose your length</label>
              <div class = "glyphForm"></div>
              <input type = "checkbox" id="primeCheck" switch checked>
+             <label for="primeCheck">Force prime numbers?</label>
         </section>
 
     <p>Glyph Color</p>
 
-    <input type="radio" value="Rainbow" name ='Color' id="Rainbow" checked >
+    <input type="radio" value=0 name ='Color' id="Rainbow" checked >
     <label for="Rainbow">Rainbow</label>
-    <input type="radio" value="Color" name ='Color'id = "Choose">
+    <input type="radio" value=1 name ='Color'id = "Choose">
     <label for="Choose">Choose your Color</label>
+    <div class = "glyphForm"></div>
+    <section id = 'rainbowShifter'>
+    <input type = 'range' min=0 max = 359 value = 270 name = "Rainbow offset" id = "rainbowOffset">
+    <label for = 'rainbowOffset'>Shift rainbow color</label>
+    </section>
+    <section id = 'customColorPicker' style = "display: none;">
+    <input type="color" id="customColor" name="glyphColor" value="#000000" colorspace="limited-srgb"/>
+    <label for = 'customColor'>Choose your color</label>
+
+    <p>Background Color</p>
+    </section>
 
     </form>
 
+</section>
+<section class = 'Panel' id="CPanel"></section>
+
+<section class = 'Panel' id="RPanel"></section>
 
 <script src="generator.js" ></script>
 <script src="app.js" ></script>
