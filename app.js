@@ -110,90 +110,21 @@ canvas.toBlob((blob)=>{
 
 }
     
-function getGlyphArray() {
-let wordNumbers = [...input]
-let charNumbers = wordNumbers.map((char)=>{
+function getGlyphArray(input){
+let charNumbers = [...input].map((char)=>{
     return char.codePointAt(0)
 })
-charNumbers.sort((a,b)=> a-b)
-
-charNumbers = [... new Set(charNumbers)]
-
-
-function necklaceMaker(input) {
-    input = Array.from(input)
-    let index = 1
-    let output = []
-
-const ALPHABET = "01";
-let LENGTH = 29;
-
-
-function* necklaces() {
-    const state = new Array(LENGTH + 1).fill(0);
-    const render = new Array(LENGTH).fill(ALPHABET[0]);
-    yield* _generate(state, render, 1, 1);
-}
-
-
-function* _generate(state, render, depth, period) {
-    if (depth > LENGTH) {
-        if (LENGTH % period === 0) {
-            yield render.join("");
+let glyphArray = []
+    charNumbers = charNumbers.map((char)=>{
+        if(char > 0){
+         glyphArray.push((char*2-3).toString(2))
         }
-        return;
-    }
-
-
-    const prevValue = state[depth - period];
-    state[depth] = prevValue;
-    render[depth - 1] = ALPHABET[prevValue];
-    yield* _generate(state, render, depth + 1, period);
-
-
-    for (let bit = prevValue + 1; bit < ALPHABET.length; bit++) {
-        state[depth] = bit;
-        render[depth - 1] = ALPHABET[bit];
-        yield* _generate(state, render, depth + 1, depth);
-    }
-}
-
-    for (const necklace of necklaces()) {
-        if(index == input[0]){
-            output.push(necklace)
-            input.shift()
-        }
-        if(input.length == 0){
-            break
-        }
-        index++
-        
-        
-    }
-    return(output)
-}
-
-
-    let sortArray = Array.from(charNumbers)
-        
-    let binaryArray = necklaceMaker(sortArray)
-    let printedArray = []
-
-    wordNumbers.map((letter)=>{
-        if (letter == ''){
-
-        printedArray.push('0'.repeat(glyphLength))
-        }
-
         else{
-
-            let output = sortArray.indexOf(letter.codePointAt(0))
-            printedArray.push(binaryArray[output])
+            glyphArray.push(0)
         }
     })
-    
-    return(printedArray)
-    }
+return glyphArray
+}
 makeGlyph()
 
 

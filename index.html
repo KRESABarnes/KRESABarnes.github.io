@@ -10,8 +10,9 @@
 
 <body style="background-color: rgb(142, 3, 158);">
 <section class = 'Panel' id="LPanel">
-    <canvas id="glyph" width="1000px" height=1000px style="position: absolute; left: 20%; top:100px;"></canvas>
+    
     <p>Glyph Settings</p>
+    <div class = "glyphForm"></div>
     <form id = glyphSettings>
     <label for = "glyphText">Glyph text:</label>
     <input id="glyphText" name = "glyphText" type = "text" placeholder ="Your text here" maxlength="28" >
@@ -53,13 +54,15 @@
     <input type="color" id="customColor" name="glyphColor" value="#000000" colorspace="limited-srgb"/>
     <label for = 'customColor'>Choose your color</label>
 
-    <p>Background Color</p>
+    
     </section>
-
+    <p>Background Color</p>
     </form>
 
 </section>
-<section class = 'Panel' id="CPanel"></section>
+<section class = 'Panel' id="CPanel">
+    <canvas id="glyph" width="1000px" height=1000px style="position: absolute; left: 20%; top:100px;"></canvas>
+</section>
 
 <section class = 'Panel' id="RPanel"></section>
 
